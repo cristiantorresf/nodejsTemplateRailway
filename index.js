@@ -1,12 +1,13 @@
-const http = require('http');
-const PORT = 3000;
+const express = require('express');
+const router = require('./controller/routeController')
+const cors = require("cors");
+const app = express();
+const port = process.env.PORT || 3000;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World!');
+app.use('/api',cors(), router);
+
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`)
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
-});
+module.exports = app;
